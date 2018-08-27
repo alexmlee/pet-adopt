@@ -1,5 +1,5 @@
 import React from "react";
-import Pet from "./Pet.jsx";
+import Pet from "./Pet";
 import pf from "petfinder-client";
 
 const petfinder = pf({
