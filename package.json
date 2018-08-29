@@ -6,9 +6,12 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx,css,json}\" ",
     "format-check": "prettier --list-different \"src/**/*.{js,jsx,css,json}\" ",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --silent",
     "lint": "eslint **/*.{js,jsx}",
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "test:update": "jest --silent -u",
+    "test:watch": "jest --silent --watch",
+    "test:coverage": "jest --silent --coverage"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +20,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.4.0",
     "eslint-config-prettier": "^3.0.1",
@@ -24,8 +28,10 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.5.0",
     "parcel-bundler": "^1.9.7",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "react-test-renderer": "^16.4.2"
   },
   "dependencies": {
     "@reach/router": "^1.1.1",
@@ -33,5 +39,10 @@
     "petfinder-client": "0.0.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!petfinder-client).+"
+    ]
   }
 }
