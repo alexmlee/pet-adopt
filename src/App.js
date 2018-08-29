@@ -1,16 +1,34 @@
 import React from "react";
 import { render } from "react-dom";
-import { Router, Link } from "@reach/router";
-import Results from "./Results";
-import Details from "./Details";
-import SearchParams from "./SearchParams";
+import { Router } from "@reach/router";
+// import Results from "./Results";
+// import Details from "./Details";
+// import SearchParams from "./SearchParams";
 import pf from "petfinder-client";
 import { Provider } from "./SearchContext";
 import NavBar from "./NavBar";
+import Loadable from "react-loadable";
 
 const petfinder = pf({
   key: process.env.API_KEY,
   secret: process.env.API_SECRET
+});
+
+const loading = () => <h1>loading split code..</h1>;
+
+const LoadableDetails = Loadable({
+  loader: () => import("./Details"),
+  loading
+});
+
+const LoadableSearchParams = Loadable({
+  loader: () => import("./SearchParams"),
+  loading
+});
+
+const LoadableResults = Loadable({
+  loader: () => import("./Results"),
+  loading
 });
 
 class App extends React.Component {
@@ -78,9 +96,9 @@ class App extends React.Component {
         <NavBar />
         <Provider value={this.state}>
           <Router>
-            <Results path="/" />
-            <Details path="/details/:id" />
-            <SearchParams path="/search-params" />
+            <LoadableResults path="/" />
+            <LoadableDetails path="/details/:id" />
+            <LoadableSearchParams path="/search-params" />
           </Router>
         </Provider>
       </div>
